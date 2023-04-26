@@ -1,0 +1,51 @@
+{
+    "name": "vite-plugin-tree-shakable-decorators",
+    "version": "0.0.0",
+    "packageManager": "pnpm@8.1.1",
+    "description": "",
+    "author": "Julien Pinto",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Stnaire/vite-plugin-tree-shakable-decorators.git"
+    },
+    "keywords": [],
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.mjs"
+        }
+    },
+    "main": "./dist/index.mjs",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "rimraf dist && unbuild",
+        "dev": "unbuild --stub",
+        "lint": "eslint .",
+        "prepublishOnly": "pnpm build",
+        "release": "bumpp && npm publish",
+        "typecheck": "tsc --noEmit"
+    },
+    "peerDependencies": {
+        "vite": "^4.2.0"
+    },
+    "devDependencies": {
+        "@types/estree": "^1.0.0",
+        "@types/node": "^18.0.0",
+        "bumpp": "^8.2.1",
+        "eslint": "^8.18.0",
+        "pnpm": "^7.2.1",
+        "rimraf": "^3.0.2",
+        "typescript": "^4.7.4",
+        "unbuild": "^0.7.4"
+    },
+    "dependencies": {
+        "acorn": "^8.8.2"
+    }
+}
