@@ -18,7 +18,7 @@ let Dialog = class {
 };
 __decorate([
   Prop({required: true})
-], Dialog.prototype, "title", 2);
+], Dialog.prototype, "title", void 0);
 Dialog = __decorate([
   Component
 ], Dialog);
@@ -28,7 +28,7 @@ The problem is that the `__decorate` call is in the global scope. And because it
 
 If you're building a lib for example it's a big issue because your end users will definitely not want all your components to be included in their build when they only use a few.
 
-This plugin will wrap the decorators declarations into an IIFE maked as `/* @__PURE__ */`:
+This plugin will wrap the decorators declarations into an IIFE marked as `/* @__PURE__ */`:
 ```js
 let Dialog =  class Dialog {
 };
@@ -51,7 +51,9 @@ This way the `Dialog` class and its decorators will only be included in the buil
 ```bash
 npm i vite-plugin-tree-shakable-decorators --save-dev
 ```
-- yarn 
+
+- yarn
+
 ```bash
 yarn add -D vite-plugin-tree-shakable-decorators
 ```
