@@ -68,7 +68,11 @@ export default function TreeShakableDecorators(): Plugin {
                     if (parents.length > 1) {
                         selectedNode = parents[1];
                     }
-                    extractedDeclarations.push(code.substring(selectedNode.start, selectedNode.end));
+                    const extractedDeclaration = code.substring(selectedNode.start, selectedNode.end);
+                    if (extractedDeclaration.includes('@notPure')) {
+                        continue ;
+                    }
+                    extractedDeclarations.push(extractedDeclaration);
                     code = code.substring(0, selectedNode.start) + code.substring(selectedNode.end);
 
                     for (let i = parents.length - 1; i > 0; --i) {
@@ -124,7 +128,7 @@ ${moduleNameWithAliases} = /**!PURE*/ ((_) => {
             }
         },
 
-        generateBundle(options, bundle) {
+        generateBundle(options: any, bundle: any) {
             for (const fileName of Object.keys(bundle)) {
                 const chunk: any = bundle[fileName];
                 if (typeof(chunk) === 'object' && typeof(chunk.code) === 'string') {
